@@ -109,20 +109,13 @@ export default function StoreSettingsPage() {
       description: 'Your store logo has been updated.',
     })
   }
-
+  //
   const handleRemoveLogo = () => {
     setLogo(null)
     setLogoPreview(null)
   }
 
-  const handleApplyTemplate = () => {
-    setCurrentTemplate(selectedTemplate)
-    setTemplateModalOpen(false)
-    toast({
-      title: 'Template updated!',
-      description: `Your store now uses the ${selectedTemplate.charAt(0).toUpperCase() + selectedTemplate.slice(1)} template.`,
-    })
-  }
+
 
   const handleUpdateMpesa = () => {
     setMpesaConfirmOpen(true)

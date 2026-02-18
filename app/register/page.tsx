@@ -15,7 +15,9 @@ export default function RegisterPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
+    phone: '',
     password: '',
     confirmPassword: '',
   })
@@ -23,6 +25,10 @@ export default function RegisterPage() {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
+
+    if (!formData.name) {
+      newErrors.name = 'Full name is required'
+    }
 
     if (!formData.email) {
       newErrors.email = 'Email is required'
@@ -52,7 +58,7 @@ export default function RegisterPage() {
     if (!validateForm()) {
       return
     }
-
+    //
     setIsLoading(true)
 
     try {
@@ -130,6 +136,25 @@ export default function RegisterPage() {
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
+                  <Label htmlFor="name" className="text-sm font-medium">
+                    Full Name
+                  </Label>
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="John Doe"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={`h-12 text-base ${errors.name ? 'border-destructive' : ''}`}
+                    disabled={isLoading}
+                  />
+                  {errors.name && (
+                    <p className="text-sm text-destructive">{errors.name}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
                   <Label htmlFor="email" className="text-sm font-medium">
                     Email Address
                   </Label>
@@ -146,6 +171,22 @@ export default function RegisterPage() {
                   {errors.email && (
                     <p className="text-sm text-destructive">{errors.email}</p>
                   )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="phone" className="text-sm font-medium">
+                    Phone Number
+                  </Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="+1234567890"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={`h-12 text-base ${errors.phone ? 'border-destructive' : ''}`}
+                    disabled={isLoading}
+                  />
                 </div>
 
                 <div className="space-y-2">

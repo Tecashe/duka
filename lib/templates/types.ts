@@ -69,6 +69,8 @@ export type TemplateCategory =
   | 'food'
   | 'electronics'
   | 'beauty'
+  | 'professional'
+  | 'handcraft'
 
 export type SectionType =
   | 'hero'
@@ -303,4 +305,5 @@ export interface WebsiteTemplate {
   typography?: TemplateTypography
   pages: TemplatePage[]
   previewImages?: TemplatePreviewImages
+  enabled: boolean
 }

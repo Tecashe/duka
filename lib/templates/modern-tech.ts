@@ -1,8 +1,9 @@
 import { WebsiteTemplate } from './types'
-
+//
 export const modernTechTemplate: WebsiteTemplate = {
   id: 'modern-tech',
   name: 'Modern Tech',
+  enabled: true,
   description: 'Bold, contemporary design ideal for electronics, gadgets, and tech accessories',
   category: 'modern',
   thumbnail: '/templates/modern-tech-thumb.jpg',
@@ -25,11 +26,13 @@ export const modernTechTemplate: WebsiteTemplate = {
     {
       id: 'home',
       name: 'Home',
+      slug: '/',
       enabled: true,
       sections: [
         {
           id: 'hero',
           type: 'hero',
+          enabled: true,
           title: 'Hero Section',
           content: {
             heading: 'Next-Gen Technology',
@@ -43,6 +46,7 @@ export const modernTechTemplate: WebsiteTemplate = {
         {
           id: 'stats',
           type: 'stats',
+          enabled: true,
           title: 'Statistics',
           content: {
             items: [
@@ -56,6 +60,7 @@ export const modernTechTemplate: WebsiteTemplate = {
         {
           id: 'featured-products',
           type: 'products',
+          enabled: true,
           title: 'Featured Products',
           content: {
             heading: 'Best Sellers',
@@ -66,6 +71,7 @@ export const modernTechTemplate: WebsiteTemplate = {
         {
           id: 'features',
           type: 'features',
+          enabled: true,
           title: 'Why Choose Us',
           content: {
             heading: 'The Tech Store Difference',
@@ -107,6 +113,7 @@ export const modernTechTemplate: WebsiteTemplate = {
         {
           id: 'testimonials',
           type: 'testimonials',
+          enabled: true,
           title: 'Customer Reviews',
           content: {
             heading: 'What Our Customers Say',
@@ -138,6 +145,7 @@ export const modernTechTemplate: WebsiteTemplate = {
         {
           id: 'cta',
           type: 'cta',
+          enabled: true,
           title: 'Call to Action',
           content: {
             heading: 'Ready to Upgrade?',
@@ -151,11 +159,13 @@ export const modernTechTemplate: WebsiteTemplate = {
     {
       id: 'about',
       name: 'About Us',
+      slug: '/about',
       enabled: true,
       sections: [
         {
           id: 'about-hero',
           type: 'hero',
+          enabled: true,
           title: 'About Hero',
           content: {
             heading: 'About Us',
@@ -167,6 +177,7 @@ export const modernTechTemplate: WebsiteTemplate = {
         {
           id: 'story',
           type: 'about',
+          enabled: true,
           title: 'Our Story',
           content: {
             heading: 'Innovation at Your Fingertips',
@@ -177,6 +188,7 @@ export const modernTechTemplate: WebsiteTemplate = {
         {
           id: 'values',
           type: 'features',
+          enabled: true,
           title: 'Our Values',
           content: {
             heading: 'What Drives Us',
@@ -209,11 +221,13 @@ export const modernTechTemplate: WebsiteTemplate = {
     {
       id: 'shop',
       name: 'Shop',
+      slug: '/shop',
       enabled: true,
       sections: [
         {
           id: 'shop-hero',
           type: 'hero',
+          enabled: true,
           title: 'Shop Hero',
           content: {
             heading: 'Browse Our Collection',
@@ -223,6 +237,7 @@ export const modernTechTemplate: WebsiteTemplate = {
         {
           id: 'products-grid',
           type: 'products',
+          enabled: true,
           title: 'All Products',
           content: {
             items: []
@@ -233,11 +248,13 @@ export const modernTechTemplate: WebsiteTemplate = {
     {
       id: 'contact',
       name: 'Contact',
+      slug: '/contact',
       enabled: true,
       sections: [
         {
           id: 'contact-form',
           type: 'contact',
+          enabled: true,
           title: 'Contact Form',
           content: {
             heading: 'Need Help?',
@@ -271,11 +288,13 @@ export const modernTechTemplate: WebsiteTemplate = {
     {
       id: 'faq',
       name: 'FAQ',
+      slug: '/faq',
       enabled: true,
       sections: [
         {
           id: 'faq-list',
           type: 'faq',
+          enabled: true,
           title: 'FAQ List',
           content: {
             heading: 'Common Questions',

@@ -1,8 +1,9 @@
 import { WebsiteTemplate } from './types'
-
+//
 export const elegantFashionTemplate: WebsiteTemplate = {
   id: 'elegant-fashion',
   name: 'Elegant Fashion',
+  enabled: true,
   description: 'Sophisticated design perfect for fashion boutiques, jewelry stores, and premium retail brands',
   category: 'elegant',
   thumbnail: '/templates/elegant-fashion-thumb.jpg',
@@ -25,11 +26,13 @@ export const elegantFashionTemplate: WebsiteTemplate = {
     {
       id: 'home',
       name: 'Home',
+      slug: '/',
       enabled: true,
       sections: [
         {
           id: 'hero',
           type: 'hero',
+          enabled: true,
           title: 'Hero Section',
           content: {
             heading: 'Timeless Elegance',
@@ -43,6 +46,7 @@ export const elegantFashionTemplate: WebsiteTemplate = {
         {
           id: 'featured-products',
           type: 'products',
+          enabled: true,
           title: 'Featured Collection',
           content: {
             heading: 'New Arrivals',
@@ -53,6 +57,7 @@ export const elegantFashionTemplate: WebsiteTemplate = {
         {
           id: 'about-preview',
           type: 'about',
+          enabled: true,
           title: 'Our Story',
           content: {
             heading: 'Crafted with Passion',
@@ -65,6 +70,7 @@ export const elegantFashionTemplate: WebsiteTemplate = {
         {
           id: 'testimonials',
           type: 'testimonials',
+          enabled: true,
           title: 'Customer Reviews',
           content: {
             heading: 'Loved by Customers',
@@ -96,6 +102,7 @@ export const elegantFashionTemplate: WebsiteTemplate = {
         {
           id: 'cta',
           type: 'cta',
+          enabled: true,
           title: 'Call to Action',
           content: {
             heading: 'Start Your Style Journey',
@@ -109,11 +116,13 @@ export const elegantFashionTemplate: WebsiteTemplate = {
     {
       id: 'about',
       name: 'About Us',
+      slug: '/about',
       enabled: true,
       sections: [
         {
           id: 'about-hero',
           type: 'hero',
+          enabled: true,
           title: 'About Hero',
           content: {
             heading: 'Our Story',
@@ -125,6 +134,7 @@ export const elegantFashionTemplate: WebsiteTemplate = {
         {
           id: 'mission',
           type: 'about',
+          enabled: true,
           title: 'Our Mission',
           content: {
             heading: 'Quality Meets Affordability',
@@ -135,6 +145,7 @@ export const elegantFashionTemplate: WebsiteTemplate = {
         {
           id: 'values',
           type: 'features',
+          enabled: true,
           title: 'Our Values',
           content: {
             heading: 'What We Stand For',
@@ -167,11 +178,13 @@ export const elegantFashionTemplate: WebsiteTemplate = {
     {
       id: 'shop',
       name: 'Shop',
+      slug: '/shop',
       enabled: true,
       sections: [
         {
           id: 'shop-hero',
           type: 'hero',
+          enabled: true,
           title: 'Shop Hero',
           content: {
             heading: 'Shop Our Collection',
@@ -181,6 +194,7 @@ export const elegantFashionTemplate: WebsiteTemplate = {
         {
           id: 'products-grid',
           type: 'products',
+          enabled: true,
           title: 'All Products',
           content: {
             items: []
@@ -191,11 +205,13 @@ export const elegantFashionTemplate: WebsiteTemplate = {
     {
       id: 'contact',
       name: 'Contact',
+      slug: '/contact',
       enabled: true,
       sections: [
         {
           id: 'contact-form',
           type: 'contact',
+          enabled: true,
           title: 'Contact Form',
           content: {
             heading: 'Get In Touch',
@@ -224,11 +240,13 @@ export const elegantFashionTemplate: WebsiteTemplate = {
     {
       id: 'faq',
       name: 'FAQ',
+      slug: '/faq',
       enabled: false,
       sections: [
         {
           id: 'faq-list',
           type: 'faq',
+          enabled: true,
           title: 'FAQ List',
           content: {
             heading: 'Frequently Asked Questions',

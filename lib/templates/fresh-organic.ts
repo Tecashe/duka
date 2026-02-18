@@ -3,6 +3,7 @@ import { WebsiteTemplate } from './types'
 export const freshOrganicTemplate: WebsiteTemplate = {
   id: 'fresh-organic',
   name: 'Fresh & Organic',
+  enabled: true,
   description: 'Warm, inviting design perfect for food, organic products, and wellness brands',
   category: 'vibrant',
   thumbnail: '/templates/fresh-organic-thumb.jpg',
@@ -25,11 +26,13 @@ export const freshOrganicTemplate: WebsiteTemplate = {
     {
       id: 'home',
       name: 'Home',
+      slug: '/',
       enabled: true,
       sections: [
         {
           id: 'hero',
           type: 'hero',
+          enabled: true,
           title: 'Hero Section',
           content: {
             heading: 'Farm Fresh, Naturally Delicious',
@@ -43,6 +46,7 @@ export const freshOrganicTemplate: WebsiteTemplate = {
         {
           id: 'features',
           type: 'features',
+          enabled: true,
           title: 'Why Choose Organic',
           content: {
             heading: 'The Organic Difference',
@@ -74,6 +78,7 @@ export const freshOrganicTemplate: WebsiteTemplate = {
         {
           id: 'featured-products',
           type: 'products',
+          enabled: true,
           title: 'This Week\'s Harvest',
           content: {
             heading: 'Fresh Picks',
@@ -84,6 +89,7 @@ export const freshOrganicTemplate: WebsiteTemplate = {
         {
           id: 'about-preview',
           type: 'about',
+          enabled: true,
           title: 'Our Farm Story',
           content: {
             heading: 'From Our Farm to Your Family',
@@ -96,6 +102,7 @@ export const freshOrganicTemplate: WebsiteTemplate = {
         {
           id: 'testimonials',
           type: 'testimonials',
+          enabled: true,
           title: 'Customer Reviews',
           content: {
             heading: 'What Families Are Saying',
@@ -127,6 +134,7 @@ export const freshOrganicTemplate: WebsiteTemplate = {
         {
           id: 'gallery',
           type: 'gallery',
+          enabled: true,
           title: 'Farm Gallery',
           content: {
             heading: 'See Where Your Food Grows',
@@ -142,6 +150,7 @@ export const freshOrganicTemplate: WebsiteTemplate = {
         {
           id: 'cta',
           type: 'cta',
+          enabled: true,
           title: 'Call to Action',
           content: {
             heading: 'Start Your Healthy Journey',
@@ -155,11 +164,13 @@ export const freshOrganicTemplate: WebsiteTemplate = {
     {
       id: 'about',
       name: 'About Us',
+      slug: '/about',
       enabled: true,
       sections: [
         {
           id: 'about-hero',
           type: 'hero',
+          enabled: true,
           title: 'About Hero',
           content: {
             heading: 'Our Story',
@@ -171,6 +182,7 @@ export const freshOrganicTemplate: WebsiteTemplate = {
         {
           id: 'story',
           type: 'about',
+          enabled: true,
           title: 'Our Journey',
           content: {
             heading: 'Rooted in Tradition, Growing with Purpose',
@@ -181,6 +193,7 @@ export const freshOrganicTemplate: WebsiteTemplate = {
         {
           id: 'certifications',
           type: 'features',
+          enabled: true,
           title: 'Our Certifications',
           content: {
             heading: 'Certified Organic Excellence',
@@ -213,11 +226,13 @@ export const freshOrganicTemplate: WebsiteTemplate = {
     {
       id: 'shop',
       name: 'Shop',
+      slug: '/shop',
       enabled: true,
       sections: [
         {
           id: 'shop-hero',
           type: 'hero',
+          enabled: true,
           title: 'Shop Hero',
           content: {
             heading: 'Fresh Organic Produce',
@@ -227,6 +242,7 @@ export const freshOrganicTemplate: WebsiteTemplate = {
         {
           id: 'products-grid',
           type: 'products',
+          enabled: true,
           title: 'Available Products',
           content: {
             items: []
@@ -237,11 +253,13 @@ export const freshOrganicTemplate: WebsiteTemplate = {
     {
       id: 'contact',
       name: 'Contact',
+      slug: '/contact',
       enabled: true,
       sections: [
         {
           id: 'contact-form',
           type: 'contact',
+          enabled: true,
           title: 'Contact Form',
           content: {
             heading: 'Visit Our Farm',
@@ -275,11 +293,13 @@ export const freshOrganicTemplate: WebsiteTemplate = {
     {
       id: 'faq',
       name: 'FAQ',
+      slug: '/faq',
       enabled: true,
       sections: [
         {
           id: 'faq-list',
           type: 'faq',
+          enabled: true,
           title: 'FAQ List',
           content: {
             heading: 'Frequently Asked Questions',

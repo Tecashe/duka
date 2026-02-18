@@ -10,10 +10,32 @@ import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { TemplatePage } from '@/lib/templates/types'
+
+interface Product {
+  name: string
+  description: string
+  price: string
+  stock: string
+  images: File[]
+}
+
+interface AIContent {
+  heading: string
+  tagline: string
+  description: string
+}
 
 export default function StoreSetupPage() {
   const [currentStep, setCurrentStep] = useState(1)
-  const [setupData, setSetupData] = useState({
+  const [setupData, setSetupData] = useState<{
+    templateId: string
+    businessName: string
+    businessCategory: string
+    products: Product[]
+    pages: TemplatePage[]
+    aiContent: AIContent | null
+  }>({
     templateId: '',
     businessName: 'My Store',
     businessCategory: 'Fashion & Apparel',
@@ -29,7 +51,7 @@ export default function StoreSetupPage() {
     { number: 4, title: 'AI Enhancement', description: 'Generate professional content' },
     { number: 5, title: 'Review & Launch', description: 'Preview and go live' }
   ]
-  //
+  //j
   const currentTemplate = setupData.templateId ? getTemplateById(setupData.templateId) : null
 
   const canProceed = () => {
@@ -137,7 +159,7 @@ export default function StoreSetupPage() {
               <AIContentGenerator
                 businessName={setupData.businessName}
                 businessCategory={setupData.businessCategory}
-                onGenerate={(content) => setSetupData({ ...setupData, aiContent: content as any })}
+                onGenerate={(content) => setSetupData({ ...setupData, aiContent: content })}
               />
               <div className="text-center space-y-2">
                 <p className="text-sm text-muted-foreground">

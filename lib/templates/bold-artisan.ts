@@ -1,8 +1,9 @@
 import { WebsiteTemplate } from './types'
-
+//
 export const boldArtisanTemplate: WebsiteTemplate = {
   id: 'bold-artisan',
   name: 'Bold Artisan',
+  enabled: true,
   description: 'Strong typography and dramatic visuals for handcrafted goods',
   category: 'handcraft',
   preview: '/templates/preview-artisan.jpg',
@@ -168,7 +169,7 @@ export const boldArtisanTemplate: WebsiteTemplate = {
           enabled: true,
           content: {
             heading: 'Get in Touch',
-            subheading: 'Have questions? We'd love to hear from you.',
+            subheading: 'Have questions? We\'d love to hear from you.',
             layout: 'centered',
           },
         },

@@ -239,6 +239,7 @@ import type {
 
 export const vibrantMarketTemplate: WebsiteTemplate = {
   id: 'vibrant-market',
+  enabled: true,
   name: 'Vibrant Market',
   description: 'Energetic and colorful design perfect for local markets and bazaars',
   category: 'marketplace',

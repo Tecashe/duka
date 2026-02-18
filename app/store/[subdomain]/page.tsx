@@ -4,7 +4,7 @@ import { MinimalTemplate } from '@/components/templates/MinimalTemplate'
 import { BoldTemplate } from '@/components/templates/BoldTemplate'
 import { VibrantTemplate } from '@/components/templates/VibrantTemplate'
 import { StoreNotFound } from '@/components/StoreNotFound'
-
+//
 async function getStoreData(subdomain: string) {
   // Try databasefirst if Prisma is available
   if (prisma) {
@@ -25,22 +25,28 @@ async function getStoreData(subdomain: string) {
 
       return {
         id: store.id,
-        name: store.name,
         subdomain: store.subdomain,
+        businessName: store.name,
         description: store.description || '',
         category: store.category,
         template: store.template as 'minimal' | 'bold' | 'vibrant',
-        mpesaNumber: store.mpesaNumber,
-        mpesaType: store.mpesaType as 'till' | 'paybill',
-        products: store.products.map(p => ({
+        primaryColor: '#000000', // Default color as it's not in DB yet
+        mpesaNumber: store.mpesaNumber || '',
+        mpesaType: (store.mpesaType as 'till' | 'paybill') || 'till',
+        deliveryFee: store.deliveryFee,
+        offerDelivery: store.allowDelivery,
+        offerPickup: store.allowPickup,
+        pickupLocation: store.pickupAddress || undefined,
+        products: store.products.map((p: any) => ({
           id: p.id,
           name: p.name,
           description: p.description || '',
           price: p.price,
-          compareAtPrice: p.compareAtPrice,
+          compareAtPrice: p.compareAtPrice || undefined,
           stock: p.stock,
           images: p.images,
-          category: 'General'
+          category: p.category || 'General',
+          isActive: p.visible
         }))
       }
     } catch (error) {

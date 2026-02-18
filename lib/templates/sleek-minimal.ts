@@ -5,6 +5,7 @@ export const sleekMinimalTemplate: WebsiteTemplate = {
   name: 'Sleek Minimal',
   description: 'Clean lines and maximum whitespace for a sophisticated look',
   category: 'professional',
+  enabled: true,
   preview: '/templates/preview-minimal.jpg',
   colors: {
     primary: '#000000',

@@ -44,7 +44,7 @@ export default function ProductDetailPage() {
   }
 
   const handleAddToCart = () => {
-    if (!product.inStock) return
+    if (product.stock <= 0) return
 
     setIsAdding(true)
     addToCart(product, quantity)
@@ -80,7 +80,7 @@ export default function ProductDetailPage() {
           </Link>
 
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            {/*Product Image */}
+            {/*ProductImage */}
             <div className="space-y-4">
               <Dialog>
                 <DialogTrigger asChild>
@@ -123,7 +123,7 @@ export default function ProductDetailPage() {
                     {formatKES(product.price)}
                   </p>
 
-                  {product.inStock ? (
+                  {product.stock > 0 ? (
                     <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
                       <span className="w-2 h-2 rounded-full bg-primary"></span>
                       In Stock
@@ -143,7 +143,7 @@ export default function ProductDetailPage() {
                 </p>
               </div>
 
-              {product.inStock ? (
+              {product.stock > 0 ? (
                 <div className="space-y-4 pt-4">
                   {/* Quantity Selector */}
                   <div className="space-y-2">

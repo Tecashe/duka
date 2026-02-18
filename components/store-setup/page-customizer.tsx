@@ -12,7 +12,7 @@ import { Badge } from '@/components/ui/badge'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Eye, Sparkles, FileText, Home, Info, Store, Phone, HelpCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
-
+//
 interface PageCustomizerProps {
   template: WebsiteTemplate
   onComplete: (customizedPages: TemplatePage[]) => void
@@ -31,7 +31,7 @@ export function PageCustomizer({ template, onComplete }: PageCustomizerProps) {
   const [pages, setPages] = useState<TemplatePage[]>(template.pages)
   const [editingSection, setEditingSection] = useState<{ pageId: string; sectionId: string } | null>(null)
 
-  const togglePage = (pageId: PageType) => {
+  const togglePage = (pageId: string) => {
     setPages(pages.map(page =>
       page.id === pageId ? { ...page, enabled: !page.enabled } : page
     ))
@@ -146,43 +146,43 @@ export function PageCustomizer({ template, onComplete }: PageCustomizerProps) {
                           <CardTitle className="text-sm">{section.title}</CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-3">
-                          {section.content.heading !== undefined && (
+                          {(section.content as any).heading !== undefined && (
                             <div className="space-y-1">
                               <Label className="text-xs text-muted-foreground">Heading</Label>
                               <Input
-                                value={section.content.heading}
+                                value={(section.content as any).heading}
                                 onChange={(e) => updateSectionContent(page.id, section.id, { heading: e.target.value })}
                                 placeholder="Enter heading"
                               />
                             </div>
                           )}
-                          {section.content.subheading !== undefined && (
+                          {(section.content as any).subheading !== undefined && (
                             <div className="space-y-1">
                               <Label className="text-xs text-muted-foreground">Subheading</Label>
                               <Input
-                                value={section.content.subheading}
+                                value={(section.content as any).subheading}
                                 onChange={(e) => updateSectionContent(page.id, section.id, { subheading: e.target.value })}
                                 placeholder="Enter subheading"
                               />
                             </div>
                           )}
-                          {section.content.description !== undefined && (
+                          {(section.content as any).description !== undefined && (
                             <div className="space-y-1">
                               <Label className="text-xs text-muted-foreground">Description</Label>
                               <Textarea
-                                value={section.content.description}
+                                value={(section.content as any).description}
                                 onChange={(e) => updateSectionContent(page.id, section.id, { description: e.target.value })}
                                 placeholder="Enter description"
                                 rows={3}
                               />
                             </div>
                           )}
-                          {section.content.buttonText !== undefined && (
+                          {(section.content as any).buttonText !== undefined && (
                             <div className="grid grid-cols-2 gap-2">
                               <div className="space-y-1">
                                 <Label className="text-xs text-muted-foreground">Button Text</Label>
                                 <Input
-                                  value={section.content.buttonText}
+                                  value={(section.content as any).buttonText}
                                   onChange={(e) => updateSectionContent(page.id, section.id, { buttonText: e.target.value })}
                                   placeholder="Button text"
                                 />
@@ -190,7 +190,7 @@ export function PageCustomizer({ template, onComplete }: PageCustomizerProps) {
                               <div className="space-y-1">
                                 <Label className="text-xs text-muted-foreground">Button Link</Label>
                                 <Input
-                                  value={section.content.buttonLink}
+                                  value={(section.content as any).buttonLink}
                                   onChange={(e) => updateSectionContent(page.id, section.id, { buttonLink: e.target.value })}
                                   placeholder="/link"
                                 />
