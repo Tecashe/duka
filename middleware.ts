@@ -26,17 +26,19 @@ export async function middleware(req: NextRequest) {
     .replace(':3000', '')
     .split('.')[0]
 
+  // Check if it's a main platform domain
   const isMainDomain =
     currentHost === 'www' ||
     currentHost === 'duka' ||
     currentHost === 'duka-my' ||
     currentHost === 'localhost' ||
     currentHost === 'app' ||
-    host.startsWith('localhost:') ||
-    (host.includes('vercel.app') && host.includes('duka-my'))
+    host === 'duka-my.vercel.app' || // Explicit check
+    host.includes('localhost:')
 
   // 1. Handle Subdomain Routing (Stores)
-  if (!isMainDomain && currentHost && currentHost !== host) {
+  // Only rewrite if it is NOT a main domain AND the host actually has a subdomain part
+  if (!isMainDomain && currentHost !== 'duka-my' && currentHost !== 'www' && currentHost.length > 0) {
     const url = req.nextUrl.clone()
     url.pathname = `/store/${currentHost}${url.pathname}`
     return NextResponse.rewrite(url)
