@@ -1,0 +1,155 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  name          String
+  phone         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  store         Store?
+  
+  @@index([email])
+}
+
+model Store {
+  id                String    @id @default(cuid())
+  subdomain         String    @unique
+  name              String
+  description       String?
+  category          String
+  logoUrl           String?
+  template          String    @default("vibrant")
+  
+  // M-Pesa Settings
+  mpesaType         String?   // "till" or "paybill"
+  mpesaNumber       String?
+  mpesaAccountName  String?
+  
+  // Delivery Settings
+  allowDelivery     Boolean   @default(true)
+  deliveryFee       Int       @default(0)
+  allowPickup       Boolean   @default(true)
+  pickupAddress     String?
+  
+  // Subscription
+  subscriptionStatus String   @default("trial") // trial, active, paused, cancelled
+  trialEndsAt       DateTime?
+  subscriptionEndsAt DateTime?
+  
+  visible           Boolean   @default(true)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  userId            String    @unique
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  products          Product[]
+  orders            Order[]
+  
+  @@index([subdomain])
+  @@index([userId])
+}
+
+model Product {
+  id              String    @id @default(cuid())
+  name            String
+  description     String?
+  price           Int
+  compareAtPrice  Int?
+  stock           Int       @default(0)
+  trackStock      Boolean   @default(true)
+  visible         Boolean   @default(true)
+  category        String?
+  images          String[]  @default([])
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  storeId         String
+  store           Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  
+  orderItems      OrderItem[]
+  
+  @@index([storeId])
+  @@index([visible])
+}
+
+model Order {
+  id              String    @id @default(cuid())
+  reference       String    @unique
+  status          String    @default("pending") // pending, confirmed, preparing, dispatched, delivered, cancelled
+  
+  // Customer Details
+  customerName    String
+  customerPhone   String
+  customerEmail   String?
+  
+  // Delivery Details
+  deliveryMethod  String    // delivery or pickup
+  deliveryAddress String?
+  deliveryFee     Int       @default(0)
+  
+  // Payment
+  paymentStatus   String    @default("pending") // pending, paid, failed
+  paymentMethod   String    @default("mpesa")
+  mpesaReceipt    String?
+  
+  // Amounts
+  subtotal        Int
+  total           Int
+  
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  confirmedAt     DateTime?
+  deliveredAt     DateTime?
+  
+  storeId         String
+  store           Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  
+  items           OrderItem[]
+  timeline        OrderTimeline[]
+  
+  @@index([storeId])
+  @@index([reference])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id          String   @id @default(cuid())
+  quantity    Int
+  price       Int
+  productName String
+  
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  
+  @@index([orderId])
+  @@index([productId])
+}
+
+model OrderTimeline {
+  id          String   @id @default(cuid())
+  status      String
+  note        String?
+  createdAt   DateTime @default(now())
+  
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  @@index([orderId])
+}
