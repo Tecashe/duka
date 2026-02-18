@@ -24,10 +24,11 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
   const isMainDomain =
     currentHost === 'www' ||
     currentHost === 'duka' ||
+    currentHost === 'duka-my' ||
     currentHost === 'localhost' ||
     currentHost === 'app' ||
     host.startsWith('localhost:') ||
-    host.includes('vercel.app') && !host.includes('-')
+    (host.includes('vercel.app') && host.includes('duka-my'))
 
   // If it's a subdomain store, rewrite to /store/[subdomain]
   if (!isMainDomain && currentHost && currentHost !== host) {
