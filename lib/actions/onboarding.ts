@@ -24,15 +24,18 @@ export async function completeOnboarding(data: {
       return { success: false, error: 'Not authenticated' }
     }
 
+    console.log('[v0] Starting store creation...')
     // Check if slug is available
     const existingStore = await prisma.store.findUnique({
       where: { subdomain: data.businessSlug }
     })
 
     if (existingStore) {
+      console.log('[v0] Store URL already taken')
       return { success: false, error: 'Store URL already taken' }
     }
 
+    console.log('[v0] Creating store in DB...')
     // Create store and first product in a transaction
     const store = await prisma.store.create({
       data: {
@@ -42,7 +45,7 @@ export async function completeOnboarding(data: {
         description: data.businessDescription,
         category: data.businessCategory,
         template: data.selectedTemplate,
-        mpesaType: data.mpesaType,
+        mpesaType: data.mpesaType, // Ensure these match schema enums
         mpesaNumber: data.mpesaNumber,
 
         trialEndsAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 14 days
@@ -62,9 +65,10 @@ export async function completeOnboarding(data: {
         products: true
       }
     })
+    console.log('[v0] Store created successfully:', store.id)
 
-    revalidatePath('/dashboard')
-    revalidatePath(`/store/${data.businessSlug}`)
+    // revalidatePath('/dashboard') // Temporarily comment out to test if this is the blocker
+    // revalidatePath(`/store/${data.businessSlug}`)
 
     return {
       success: true,
@@ -76,6 +80,6 @@ export async function completeOnboarding(data: {
     }
   } catch (error) {
     console.error('[v0] Onboarding error:', error)
-    return { success: false, error: 'Failed to complete onboarding' }
+    return { success: false, error: 'Failed to complete onboarding: ' + (error as Error).message }
   }
 }

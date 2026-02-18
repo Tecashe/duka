@@ -21,7 +21,9 @@ export function Step6Live() {
   useEffect(() => {
     // Savestore to database
     async function saveStore() {
+      console.log('[v0] Client: Starting saveStore...')
       try {
+        console.log('[v0] Client: Calling completeOnboarding...')
         const result = await completeOnboarding({
           businessName: data.businessName,
           businessSlug: data.businessSlug,
@@ -44,6 +46,7 @@ export function Step6Live() {
         }
 
         // Success! Show animation
+        console.log('[v0] Client: Store saved successfully!')
         setIsSaving(false)
         setShowAnimation(true)
       } catch (error) {
