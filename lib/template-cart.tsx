@@ -18,15 +18,15 @@ interface CartContextType {
   clearCart: () => void
   total: number
 }
-
+//
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
-export function TemplateCartProvider({ 
-  children, 
-  subdomain 
-}: { 
+export function TemplateCartProvider({
+  children,
+  subdomain
+}: {
   children: ReactNode
-  subdomain: string 
+  subdomain: string
 }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [isInitialized, setIsInitialized] = useState(false)
@@ -100,10 +100,10 @@ export function useTemplateCart(subdomain: string) {
     // Return a stub if provider is not available (for initial render)
     return {
       items: [],
-      addItem: () => {},
-      removeItem: () => {},
-      updateQuantity: () => {},
-      clearCart: () => {},
+      addItem: () => { },
+      removeItem: () => { },
+      updateQuantity: () => { },
+      clearCart: () => { },
       total: 0,
     }
   }
