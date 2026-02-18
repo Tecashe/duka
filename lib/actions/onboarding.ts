@@ -44,7 +44,7 @@ export async function completeOnboarding(data: {
         template: data.selectedTemplate,
         mpesaType: data.mpesaType,
         mpesaNumber: data.mpesaNumber,
-        isActive: true,
+
         trialEndsAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 14 days
         products: {
           create: {

@@ -19,7 +19,7 @@ async function getStoreData(subdomain: string) {
         }
       })
 
-      if (!store || !store.isActive) {
+      if (!store || !store.visible) {
         return null
       }
 
