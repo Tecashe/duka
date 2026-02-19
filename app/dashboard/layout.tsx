@@ -1,4 +1,5 @@
 'use client'
+// Note: businessName, storeUrl, initials are fetched via props from a Server Component wrapper
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -10,19 +11,20 @@ import { useTheme } from 'next-themes'
 import { NotificationCenter } from '@/components/dashboard/notification-center'
 import { ThemeToggle } from '@/components/dashboard/theme-toggle'
 import { Breadcrumbs } from '@/components/dashboard/breadcrumbs'
-import { 
-  Home, 
-  ShoppingBag, 
-  Package, 
-  Settings, 
-  ExternalLink, 
-  Menu, 
+import {
+  Home,
+  ShoppingBag,
+  Package,
+  Settings,
+  ExternalLink,
+  Menu,
   X,
   ChevronLeft,
   ChevronRight,
   LogOut,
   User,
-  TrendingUp
+  TrendingUp,
+  Palette
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
@@ -50,6 +52,11 @@ const navigationItems = [
     icon: Package,
   },
   {
+    name: 'Design',
+    href: '/dashboard/design',
+    icon: Palette,
+  },
+  {
     name: 'Settings',
     href: '/dashboard/settings',
     icon: Settings,
@@ -58,8 +65,14 @@ const navigationItems = [
 
 function DashboardLayoutInner({
   children,
+  businessName,
+  storeUrl,
+  initials,
 }: {
   children: React.ReactNode
+  businessName: string
+  storeUrl: string
+  initials: string
 }) {
   const pathname = usePathname()
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -79,11 +92,6 @@ function DashboardLayoutInner({
     setSidebarCollapsed(newState)
     localStorage.setItem('sidebar-collapsed', String(newState))
   }
-
-  // Placeholder data
-  const businessName = 'Mama Grace Fashions'
-  const storeUrl = 'mamagrace.duka.co.ke'
-  const initials = 'MG'
 
   return (
     <div className="min-h-screen bg-background">
@@ -113,11 +121,11 @@ function DashboardLayoutInner({
         {/* Mobile Sidebar Overlay */}
         {sidebarOpen && (
           <>
-            <div 
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-30 lg:hidden" 
+            <div
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-30 lg:hidden"
               onClick={() => setSidebarOpen(false)}
             />
-            <div 
+            <div
               className="fixed inset-y-0 left-0 w-72 bg-card border-r border-border z-40 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
@@ -191,7 +199,7 @@ function DashboardLayoutInner({
 
       <div className="flex">
         {/* Desktop Sidebar */}
-        <aside 
+        <aside
           className={cn(
             'hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:border-r lg:border-border lg:bg-card transition-all duration-300 ease-in-out shadow-sm',
             sidebarCollapsed ? 'lg:w-16' : 'lg:w-64'
@@ -334,7 +342,7 @@ function DashboardLayoutInner({
         </aside>
 
         {/* Main Content */}
-        <div 
+        <div
           className={cn(
             'flex-1 transition-all duration-300 ease-in-out',
             sidebarCollapsed ? 'lg:pl-16' : 'lg:pl-64'
@@ -394,14 +402,46 @@ function DashboardLayoutInner({
   )
 }
 
-export default function DashboardLayout({
+// Async server wrapper to fetch store data
+import { getCurrentUser } from '@/lib/auth'
+import { prisma, isPrismaAvailable } from '@/lib/prisma'
+
+async function getStoreInfo() {
+  if (!isPrismaAvailable) {
+    return { businessName: 'My Store', storeUrl: 'duka-my.vercel.app/store/mystore', initials: 'MS' }
+  }
+  try {
+    const user = await getCurrentUser()
+    if (!user) return { businessName: 'My Store', storeUrl: 'duka-my.vercel.app/store/mystore', initials: 'MS' }
+    const store = await prisma.store.findFirst({ where: { userId: user.id } })
+    if (!store) return { businessName: 'My Store', storeUrl: 'duka-my.vercel.app/store/mystore', initials: 'MS' }
+    const name = store.name || 'My Store'
+    const initials = name.split(' ').map((w: string) => w[0]).join('').toUpperCase().slice(0, 2)
+    return {
+      businessName: name,
+      storeUrl: `duka-my.vercel.app/store/${store.subdomain}`,
+      initials,
+    }
+  } catch {
+    return { businessName: 'My Store', storeUrl: 'duka-my.vercel.app/store/mystore', initials: 'MS' }
+  }
+}
+
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const storeInfo = await getStoreInfo()
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <DashboardLayoutInner>{children}</DashboardLayoutInner>
+      <DashboardLayoutInner
+        businessName={storeInfo.businessName}
+        storeUrl={storeInfo.storeUrl}
+        initials={storeInfo.initials}
+      >
+        {children}
+      </DashboardLayoutInner>
     </ThemeProvider>
   )
 }

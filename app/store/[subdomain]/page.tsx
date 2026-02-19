@@ -1,12 +1,10 @@
 import { prisma } from '@/lib/prisma'
 import { mockStores } from '@/lib/stores'
-import { MinimalTemplate } from '@/components/templates/MinimalTemplate'
-import { BoldTemplate } from '@/components/templates/BoldTemplate'
-import { VibrantTemplate } from '@/components/templates/VibrantTemplate'
+import { getTemplateComponent } from '@/components/templates/template-registry'
 import { StoreNotFound } from '@/components/StoreNotFound'
-//
+
 async function getStoreData(subdomain: string) {
-  // Try databasefirst if Prisma is available
+  // Try database first if Prisma is available
   if (prisma) {
     try {
       const store = await prisma.store.findUnique({
@@ -29,8 +27,8 @@ async function getStoreData(subdomain: string) {
         businessName: store.name,
         description: store.description || '',
         category: store.category,
-        template: store.template as 'minimal' | 'bold' | 'vibrant',
-        primaryColor: '#000000', // Default color as it's not in DB yet
+        template: store.template,
+        primaryColor: '#000000',
         mpesaNumber: store.mpesaNumber || '',
         mpesaType: (store.mpesaType as 'till' | 'paybill') || 'till',
         deliveryFee: store.deliveryFee,
@@ -50,12 +48,12 @@ async function getStoreData(subdomain: string) {
         }))
       }
     } catch (error) {
-      console.error('[v0] Database error:', error)
+      console.error('[store] Database error:', error)
     }
   }
 
   // Fallback to mock data for demo purposes
-  console.log('[v0] Using mock data. Connect database for live data.')
+  console.log('[store] Using mock data. Connect database for live data.')
   const mockStore = Object.values(mockStores).find(s => s.subdomain === subdomain)
   return mockStore || null
 }
@@ -68,14 +66,6 @@ export default async function StorePage({ params }: { params: Promise<{ subdomai
     return <StoreNotFound subdomain={subdomain} />
   }
 
-  switch (store.template) {
-    case 'minimal':
-      return <MinimalTemplate store={store} />
-    case 'bold':
-      return <BoldTemplate store={store} />
-    case 'vibrant':
-      return <VibrantTemplate store={store} />
-    default:
-      return <MinimalTemplate store={store} />
-  }
+  const TemplateComponent = getTemplateComponent(store.template)
+  return <TemplateComponent store={store} />
 }

@@ -8,26 +8,26 @@ export interface OnboardingData {
   businessSlug: string
   businessCategory: string
   businessDescription: string
-  
+
   // Step 2: Template
-  selectedTemplate: 'minimal' | 'bold' | 'vibrant' | null
-  
+  selectedTemplate: string | null
+
   // Step 3: M-Pesa
   mpesaType: 'till' | 'paybill'
   mpesaNumber: string
   mpesaConfirmed: boolean
-  
+
   // Step 4: Trial Activation
   trialActivated: boolean
   paymentReference: string
-  
+
   // Step 5: First Product
   productPhoto: string | null
   productName: string
   productPrice: string
   productDescription: string
   productStock: number
-  
+
   // Step 6: Complete
   storeUrl: string
 }
@@ -45,7 +45,7 @@ const OnboardingContext = createContext<OnboardingContextType | undefined>(undef
 export function OnboardingProvider({ children }: { children: ReactNode }) {
   const [currentStep, setCurrentStep] = useState(1)
   const totalSteps = 7
-  
+
   const [data, setData] = useState<OnboardingData>({
     businessName: '',
     businessSlug: '',
@@ -70,7 +70,7 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <OnboardingContext.Provider 
+    <OnboardingContext.Provider
       value={{ data, updateData, currentStep, setCurrentStep, totalSteps }}
     >
       {children}

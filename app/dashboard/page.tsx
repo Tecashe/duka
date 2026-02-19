@@ -109,7 +109,8 @@ export default async function DashboardPage() {
 
   const { store, stats, recentOrders } = data
 
-  const storeUrl = `${store.subdomain}.yourdomain.com`
+  const storeUrl = `duka-my.vercel.app/store/${store.subdomain}`
+  const storeFullUrl = `https://duka-my.vercel.app/store/${store.subdomain}`
 
   const dashboardStats = [
     {
@@ -154,7 +155,7 @@ export default async function DashboardPage() {
         </div>
         <div className="flex flex-wrap gap-3">
           <Button asChild variant="outline" size="sm">
-            <Link href={`/store/${store.subdomain}`} target="_blank">
+            <Link href={storeFullUrl} target="_blank">
               <Share2 className="h-4 w-4 mr-2" />
               View Store
             </Link>
@@ -180,7 +181,7 @@ export default async function DashboardPage() {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => navigator.clipboard.writeText(`https://${storeUrl}`)}
+                onClick={() => navigator.clipboard.writeText(storeFullUrl)}
               >
                 <Copy className="h-4 w-4 mr-2" />
                 Copy Link

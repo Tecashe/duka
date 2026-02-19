@@ -16,7 +16,7 @@ export function Step6Live() {
   const [isSaving, setIsSaving] = useState(true)
   const [saveError, setSaveError] = useState('')
 
-  const storeUrl = `https://${data.businessSlug}.yourdomain.com`
+  const storeUrl = data.storeUrl || `https://duka-my.vercel.app/store/${data.businessSlug}`
 
   useEffect(() => {
     // Savestore to database
