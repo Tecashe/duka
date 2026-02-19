@@ -9,7 +9,7 @@ export async function completeOnboarding(data: {
   businessSlug: string
   businessCategory: string
   businessDescription: string
-  selectedTemplate: 'minimal' | 'bold' | 'vibrant'
+  selectedTemplate: string
   mpesaType: 'till' | 'paybill'
   mpesaNumber: string
   productName: string

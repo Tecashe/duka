@@ -1,0 +1,9 @@
+﻿app/onboarding/components/step-6-live.tsx(32,11): error TS2322: Type 'string' is not assignable to type '"minimal" | "bold" | "vibrant"'.
+components/store-setup/template-selector.tsx(116,18): error TS18048: 'template.pages' is possibly 'undefined'.
+components/store-setup/template-selector.tsx(167,22): error TS18048: 'previewTemplate.pages' is possibly 'undefined'.
+components/store-setup/template-selector.tsx(188,22): error TS18048: 'previewTemplate.pages' is possibly 'undefined'.
+components/store-setup/template-selector.tsx(191,42): error TS2339: Property 'heading' does not exist on type 'SectionContent'.
+  Property 'heading' does not exist on type 'SplitContent'.
+components/store-setup/template-selector.tsx(193,46): error TS2339: Property 'heading' does not exist on type 'SectionContent'.
+  Property 'heading' does not exist on type 'SplitContent'.
+components/template-renderer/template-page.tsx(15,31): error TS18048: 'template.typography' is possibly 'undefined'.

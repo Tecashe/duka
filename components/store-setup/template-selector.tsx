@@ -38,7 +38,7 @@ export function TemplateSelector({ selectedTemplate, onSelect }: TemplateSelecto
           >
             {/* Template Preview Image */}
             <div className="relative aspect-[4/3] bg-muted">
-              <div 
+              <div
                 className="absolute inset-0"
                 style={{
                   background: `linear-gradient(135deg, ${template.colors.primary} 0%, ${template.colors.accent} 100%)`
@@ -113,7 +113,7 @@ export function TemplateSelector({ selectedTemplate, onSelect }: TemplateSelecto
               </div>
 
               <div className="text-xs text-muted-foreground">
-                {template.pages.filter(p => p.enabled).length} pages included
+                {(template.pages || []).filter(p => p.enabled).length} pages included
               </div>
             </div>
           </div>
@@ -164,7 +164,7 @@ export function TemplateSelector({ selectedTemplate, onSelect }: TemplateSelecto
                 <div className="space-y-2">
                   <h3 className="font-semibold">Pages Included</h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                    {previewTemplate.pages.map((page) => (
+                    {(previewTemplate.pages || []).map((page) => (
                       <div
                         key={page.id}
                         className={cn(
@@ -185,12 +185,12 @@ export function TemplateSelector({ selectedTemplate, onSelect }: TemplateSelecto
                 <div className="space-y-2">
                   <h3 className="font-semibold">Sample Sections</h3>
                   <div className="space-y-3">
-                    {previewTemplate.pages[0]?.sections.slice(0, 3).map((section) => (
+                    {(previewTemplate.pages?.[0]?.sections || []).slice(0, 3).map((section) => (
                       <div key={section.id} className="p-4 border rounded-lg bg-card">
                         <p className="font-medium mb-1">{section.title}</p>
-                        {section.content.heading && (
+                        {(section.content as any).heading && (
                           <p className="text-sm text-muted-foreground">
-                            {section.content.heading}
+                            {(section.content as any).heading}
                           </p>
                         )}
                       </div>

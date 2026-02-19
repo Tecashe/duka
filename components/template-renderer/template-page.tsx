@@ -12,7 +12,7 @@ interface TemplatePageProps {
 //
 export function TemplatePageRenderer({ template, page, storeData }: TemplatePageProps) {
   return (
-    <div style={{ fontFamily: template.typography.bodyFont }}>
+    <div style={{ fontFamily: template.typography?.bodyFont }}>
       {/* Render all enabled sections */}
       {page.sections
         .filter((section) => section.enabled)
