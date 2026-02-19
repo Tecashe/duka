@@ -28,7 +28,7 @@ const pageIcons = {
 }
 
 export function PageCustomizer({ template, onComplete }: PageCustomizerProps) {
-  const [pages, setPages] = useState<TemplatePage[]>(template.pages)
+  const [pages, setPages] = useState<TemplatePage[]>(template.pages || [])
   const [editingSection, setEditingSection] = useState<{ pageId: string; sectionId: string } | null>(null)
 
   const togglePage = (pageId: string) => {

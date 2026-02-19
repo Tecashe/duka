@@ -303,7 +303,43 @@ export interface WebsiteTemplate {
   /** @deprecated Use `typography` instead */
   fonts?: TemplateFonts
   typography?: TemplateTypography
-  pages: TemplatePage[]
   previewImages?: TemplatePreviewImages
   enabled: boolean
+  pages?: TemplatePage[]
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Dynamic Site Configuration (Navigation & Footer)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface NavigationItem {
+  label: string
+  href: string
+  type?: 'link' | 'button'
+  children?: NavigationItem[] // For dropdowns
+}
+
+export interface FooterLink {
+  label: string
+  href: string
+}
+
+export interface FooterSection {
+  title: string
+  links: FooterLink[]
+}
+
+export interface SocialLink {
+  platform: 'facebook' | 'instagram' | 'twitter' | 'linkedin' | 'tiktok' | 'whatsapp'
+  url: string
+}
+
+export interface TemplateConfig {
+  navigation: NavigationItem[]
+  footer: {
+    sections: FooterSection[]
+    socials: SocialLink[]
+    copyrightText?: string
+    showNewsletter?: boolean
+  }
 }
