@@ -193,7 +193,7 @@ export function Step6Live() {
         <ul className="space-y-3">
           {[
             'Orders appear in your dashboard instantly',
-            'You&apos;ll get an email for every new order',
+            "You'll get an email for every new order",
             'Your trial lasts 14 days — no charges until Day 15'
           ].map((item, index) => (
             <li key={index} className="flex items-start gap-3">

@@ -13,9 +13,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { TrendingUp, DollarSign, ShoppingBag, Package, Plus, Copy, Share2 } from 'lucide-react'
+import { TrendingUp, DollarSign, ShoppingBag, Package, Plus, Share2 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react'
+import { CopyUrlButton } from './components/copy-url-button'
 
 async function getDashboardData(userId: string) {
   if (!isPrismaAvailable) {
@@ -178,14 +179,7 @@ export default async function DashboardPage() {
               <p className="text-lg font-mono font-medium">{storeUrl}</p>
             </div>
             <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => navigator.clipboard.writeText(storeFullUrl)}
-              >
-                <Copy className="h-4 w-4 mr-2" />
-                Copy Link
-              </Button>
+              <CopyUrlButton url={storeFullUrl} />
             </div>
           </div>
         </CardContent>
